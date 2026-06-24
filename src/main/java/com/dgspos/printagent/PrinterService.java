@@ -17,7 +17,10 @@ public class PrinterService {
         PrinterJob printerJob = PrinterJob.getPrinterJob();
 
         PrintService printer = Arrays.stream(PrinterJob.lookupPrintServices())
-                        .filter(p -> p.getName().equals("Star TSP100 Cutter (TSP143)"))
+                        .filter(p -> {
+                            String name = p.getName();
+                            return name.equals("Star TSP100 Cutter (TSP143)") || name.equals("POS-80");
+                        })
                         .findFirst().orElseThrow(() -> new RuntimeException("Printer not found"));
 
         printerJob.setPrintService(printer);

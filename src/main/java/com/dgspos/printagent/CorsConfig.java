@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://bathikpostest.dtselife.com", "http://localhost:3000")
+                        .allowedOrigins("https://bathikpostest.dtselife.com", "http://localhost:3000", "https://bathikpos.dtselife.com")
                         .allowedMethods("*")
                         .allowedHeaders("*");
             }
