@@ -1,5 +1,6 @@
 package com.dgspos.printagent;
 
+import com.dgspos.printagent.dto.BarcodeRequest;
 import com.dgspos.printagent.dto.ReceiptRequest;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,19 @@ import java.util.Arrays;
 
 @Service
 public class PrinterService {
-
     public void print(ReceiptRequest receipt) throws Exception {
+        printDocument(
+                new ReceiptPrintable(receipt)
+        );
+    }
+
+    public void printBarcode(BarcodeRequest request) throws Exception {
+        printDocument(
+                new BarcodePrintable(request)
+        );
+    }
+
+    public void printDocument(ThermalPrintable printable) throws Exception {
 
         PrinterJob printerJob = PrinterJob.getPrinterJob();
 
@@ -30,8 +42,6 @@ public class PrinterService {
 
         // 3 inch
         double width = 3 * 72;
-
-        ReceiptPrintable printable = new ReceiptPrintable(receipt);
         double height = printable.estimateHeight();
 
         paper.setSize(width, height);
@@ -46,6 +56,5 @@ public class PrinterService {
         );
 
         printerJob.print();
-
     }
 }

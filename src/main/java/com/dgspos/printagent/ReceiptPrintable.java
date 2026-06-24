@@ -8,12 +8,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
-import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
 
-public class ReceiptPrintable implements Printable {
+public class ReceiptPrintable implements ThermalPrintable {
 
     private final ReceiptRequest receipt;
 
@@ -329,12 +328,15 @@ public class ReceiptPrintable implements Printable {
                         );
 
                 if (barcode != null) {
+                    int barcodeWidth = contentWidth - 30;
+                    int barcodeHeight = 60;
 
-                    int barcodeWidth = contentWidth - 80;
-
-                    int barcodeHeight =
-                            (barcode.getHeight() * barcodeWidth)
-                                    / barcode.getWidth();
+                    // Preserves the aspect ratio of the barcode
+//                    int barcodeWidth = contentWidth - 80;
+//
+//                    int barcodeHeight =
+//                            (barcode.getHeight() * barcodeWidth)
+//                                    / barcode.getWidth();
 
                     int barcodeX =
                             LEFT_PADDING +

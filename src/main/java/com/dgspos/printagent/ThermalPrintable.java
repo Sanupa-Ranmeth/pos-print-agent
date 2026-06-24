@@ -1,4 +1,7 @@
 package com.dgspos.printagent;
 
-public interface ThermalPrintable {
+import java.awt.print.Printable;
+
+public interface ThermalPrintable extends Printable {
+    int estimateHeight();
 }

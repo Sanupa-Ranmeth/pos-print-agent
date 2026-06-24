@@ -1,5 +1,6 @@
 package com.dgspos.printagent;
 
+import com.dgspos.printagent.dto.BarcodeRequest;
 import com.dgspos.printagent.dto.ReceiptRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,11 @@ public class PrintController {
     @PostMapping("/print")
     public void print(@RequestBody ReceiptRequest request) throws Exception {
         printerService.print(request);
+    }
+
+    @PostMapping("/barcode")
+    public void barcode(@RequestBody BarcodeRequest request) throws Exception {
+        printerService.printBarcode(request);
     }
 
     @GetMapping("/printers")
